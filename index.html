@@ -3,59 +3,86 @@
 <head>
     <title>Adivina el Número</title>
     <style>
-        /* Fondo suave */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            background: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1974&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 50px 20px;
             min-height: 100vh;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Caja principal con diseño limpio */
+        /* Caja con efecto cristal y animación */
        .caja {
-            background-color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             max-width: 400px;
-            margin: auto;
+            width: 100%;
             padding: 40px 30px;
-            border-radius: 12px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
             text-align: center;
+            animation: aparecer 1s ease-out;
         }
 
-        /* Título */
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Título estilo anime */
         h1 {
-            color: #2c3e50;
+            color: #ffffff;
             font-size: 2.2em;
             margin-bottom: 10px;
             font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
         }
 
         /* Texto descriptivo */
         p {
-            color: #7f8c8d;
+            color: #f0f0f0;
             font-size: 1.1em;
             margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         /* Input */
         input {
-            background: #f8f9fa;
-            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
             padding: 14px;
             font-size: 20px;
             width: 110px;
             text-align: center;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #e0e0e0;
         }
 
         input:focus {
-            border-color: #3498db;
+            border-color: #a29bfe;
+            box-shadow: 0 0 15px rgba(162, 155, 254, 0.5);
         }
 
         /* Botones */
@@ -64,11 +91,17 @@
             font-size: 16px;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             margin: 10px 5px;
             font-weight: 500;
-            transition: background-color 0.3s, transform 0.1s;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         button:active {
@@ -76,29 +109,32 @@
         }
 
        .btn-comprobar {
-            background-color: #3498db;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
         }
 
        .btn-comprobar:hover {
-            background-color: #2980b9;
+            background: linear-gradient(135deg, #5b4cdb, #9189f8);
         }
 
        .btn-reiniciar {
-            background-color: #95a5a6;
+            background: linear-gradient(135deg, #fd79a8, #fdcb6e);
         }
 
        .btn-reiniciar:hover {
-            background-color: #7f8c8d;
+            background: linear-gradient(135deg, #fd6198, #fcc85c);
         }
 
-        /* Resultado */
-        #resultado {
+        /* Mensaje / Resultado */
+        #mensaje {
             margin-top: 30px;
             font-size: 22px;
             font-weight: 500;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             min-height: 30px;
+            transition: all 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -106,59 +142,55 @@
 
     <div class="caja">
         <h1>🎮 Adivina el Número</h1>
-        <p>Ingresa un número entre 1 y 20:</p>
+        <p>Ingresa un número entre 1 y 10:</p>
 
-        <input type="number" id="numeroUsuario" min="1" max="20">
+        <input type="number" id="numero" min="1" max="10" placeholder="?">
         <br><br>
 
         <button class="btn-comprobar" onclick="comprobar()">✅ ¡COMPROBAR!</button>
         <button class="btn-reiniciar" onclick="reiniciar()">🔄 REINICIAR</button>
 
-        <div id="resultado"></div>
+        <div id="mensaje"></div>
     </div>
 
     <script>
-        // Generar número secreto entre 1 y 20
-        let numeroSecreto = Math.floor(Math.random() * 20) + 1;
+        // TU CÓDIGO JAVASCRIPT EXACTO
+        let numeroSecreto = Math.floor(Math.random() * 10) + 1;
 
         function comprobar() {
-            let valorUsuario = document.getElementById("numeroUsuario").value;
-            let usuario = parseInt(valorUsuario);
-            let res = document.getElementById("resultado");
+          let input = document.getElementById("numero").value;
+          let numero = Number(input);
+          let mensaje = document.getElementById("mensaje");
 
-            // Validar que sea un número válido
-            if (isNaN(usuario) || usuario < 1 || usuario > 20) {
-                res.innerHTML = "⚠️ Solo números del 1 al 20";
-                res.style.color = "#f39c12";
-                res.style.backgroundColor = "#fff8e1";
-                return;
-            }
+          if (input === "") {
+            mensaje.textContent = "Escribe un número";
+            mensaje.style.color = "red";
+            return;
+          }
 
-            // Lógica del juego
-            if (usuario < numeroSecreto) {
-                res.innerHTML = "📈 Cantidad mayor";
-                res.style.color = "#2980b9";
-                res.style.backgroundColor = "#e8f4fc";
-            }
-            else if (usuario > numeroSecreto) {
-                res.innerHTML = "📉 Cantidad menor";
-                res.style.color = "#e74c3c";
-                res.style.backgroundColor = "#fdecea";
-            }
-            else {
-                res.innerHTML = "✅ ACERTASTE el número";
-                res.style.color = "#27ae60";
-                res.style.backgroundColor = "#eafaf1";
-            }
+          if (numero === numeroSecreto) {
+            mensaje.textContent = "¡ADIVINASTE!";
+            mensaje.style.color = "#00ff9c";
+
+          } else if (numero >= 1 && numero <= 5) {
+            mensaje.textContent = "El número es MENOR";
+            mensaje.style.color = "#74b9ff";
+
+          } else if (numero >= 6 && numero <= 10) {
+            mensaje.textContent = "El número es MAYOR";
+            mensaje.style.color = "#74b9ff";
+
+          } else {
+            mensaje.textContent = "Escribe un número del 1 al 10";
+            mensaje.style.color = "red";
+          }
         }
 
         function reiniciar() {
-            // Generar nuevo número
-            numeroSecreto = Math.floor(Math.random() * 20) + 1;
-            // Limpiar
-            document.getElementById("numeroUsuario").value = "";
-            document.getElementById("resultado").innerHTML = "";
-            document.getElementById("resultado").style.backgroundColor = "transparent";
+          numeroSecreto = Math.floor(Math.random() * 10) + 1;
+          document.getElementById("numero").value = "";
+          document.getElementById("mensaje").textContent = "Nuevo juego iniciado";
+          document.getElementById("mensaje").style.color = "white";
         }
     </script>
 
