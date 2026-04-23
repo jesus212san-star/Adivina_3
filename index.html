@@ -3,11 +3,12 @@
 <head>
     <title>Adivina el Número</title>
     <style>
-        @import url('https://pin.it/473eLs5yG');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1974&auto=format&fit=crop') no-repeat center center fixed;
+            /* 🐸 IMAGEN DE FONDO: RANITAS Y AGUA ANIME */
+            background: url('https://i.imgur.com/5X7zQ9L.jpg') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 50px 20px;
@@ -18,7 +19,6 @@
             align-items: center;
         }
 
-        /* Caja con efecto cristal y animación */
        .caja {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
@@ -34,17 +34,10 @@
         }
 
         @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Título estilo anime */
         h1 {
             color: #ffffff;
             font-size: 2.2em;
@@ -54,7 +47,6 @@
             letter-spacing: 1px;
         }
 
-        /* Texto descriptivo */
         p {
             color: #f0f0f0;
             font-size: 1.1em;
@@ -62,7 +54,6 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
-        /* Input */
         input {
             background: rgba(255, 255, 255, 0.2);
             color: #ffffff;
@@ -76,16 +67,13 @@
             transition: all 0.3s ease;
         }
 
-        input::placeholder {
-            color: #e0e0e0;
-        }
+        input::placeholder { color: #e0e0e0; }
 
         input:focus {
             border-color: #a29bfe;
             box-shadow: 0 0 15px rgba(162, 155, 254, 0.5);
         }
 
-        /* Botones */
         button {
             padding: 14px 24px;
             font-size: 16px;
@@ -99,32 +87,15 @@
             backdrop-filter: blur(5px);
         }
 
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+        button:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        button:active { transform: scale(0.98); }
 
-        button:active {
-            transform: scale(0.98);
-        }
+       .btn-comprobar { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+       .btn-comprobar:hover { background: linear-gradient(135deg, #5b4cdb, #9189f8); }
 
-       .btn-comprobar {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-        }
+       .btn-reiniciar { background: linear-gradient(135deg, #fd79a8, #fdcb6e); }
+       .btn-reiniciar:hover { background: linear-gradient(135deg, #fd6198, #fcc85c); }
 
-       .btn-comprobar:hover {
-            background: linear-gradient(135deg, #5b4cdb, #9189f8);
-        }
-
-       .btn-reiniciar {
-            background: linear-gradient(135deg, #fd79a8, #fdcb6e);
-        }
-
-       .btn-reiniciar:hover {
-            background: linear-gradient(135deg, #fd6198, #fcc85c);
-        }
-
-        /* Mensaje / Resultado */
         #mensaje {
             margin-top: 30px;
             font-size: 22px;
