@@ -7,30 +7,42 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* 🐸 IMAGEN DE FONDO: RANITAS Y AGUA ANIME */
-            background: url('https://i.imgur.com/5X7zQ9L.jpg') no-repeat center center fixed;
-            background-size: cover;
             margin: 0;
-            padding: 50px 20px;
+            padding: 0;
             min-height: 100vh;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
+        /* ESTILO PARA EL VIDEO DE FONDO */
+        #video-fondo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Caja con efecto cristal */
        .caja {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             max-width: 400px;
-            width: 100%;
+            width: 90%;
             padding: 40px 30px;
             border-radius: 20px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
             text-align: center;
             animation: aparecer 1s ease-out;
+            position: relative;
+            z-index: 10;
         }
 
         @keyframes aparecer {
@@ -110,6 +122,12 @@
     </style>
 </head>
 <body>
+
+    <!-- 🎬 AQUÍ PONES EL VIDEO DE FONDO -->
+    <!-- Solo cambia el link dentro de src="..." por tu video -->
+    <video id="video-fondo" autoplay muted loop playsinline>
+        <source src="Relaxing Frog Animation _ Peaceful Pond Aesthetic with Calming Piano Music(MP4).mp4" type="video/mp4">
+    </video>
 
     <div class="caja">
         <h1>🎮 Adivina el Número</h1>
