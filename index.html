@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Adivina el Número</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background-color: rgba(22, 33, 62, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 245, 212, 0.3);
+            width: 90%;
+            max-width: 400px;
+            animation: aparecer 1s ease-out;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #00f5d4;
+            margin-bottom: 20px;
+            font-size: 26px;
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
+            animation: tituloPulse 2s infinite;
+        }
+
+        @keyframes tituloPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        p {
+            margin-bottom: 25px;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        input {
+            width: 80%;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: rgba(15, 52, 96, 0.7);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        input:focus {
+            border-color: #00f5d4;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.5);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #btnComprobar {
+            background-color: #e94560;
+            color: white;
+        }
+
+        #btnReiniciar {
+            background-color: #00f5d4;
+            color: #1a1a2e;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .mensaje {
+            margin-top: 10px;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgba(15, 52, 96, 0.7);
+            min-height: 60px;
+            transition: all 0.5s ease;
+            animation: mensajeEntra 0.5s ease;
+        }
+
+        @keyframes mensajeEntra {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 ADIVINA EL NÚMERO</h1>
+        <p>He pensado un número entre 1 y 100. ¿Crees poder adivinarlo?</p>
+
+        <input type="number" id="numeroInput" placeholder="Escribe un número" min="1" max="100">
+        
+        <div class="buttons">
+            <button id="btnComprobar">COMPROBAR</button>
+            <button id="btnReiniciar">REINICIAR JUEGO</button>
+        </div>
+
+        <div id="mensaje" class="mensaje">¡Empieza a jugar!</div>
+    </div>
+
+    <script>
+        // Generar número secreto aleatorio entre 1 y 100
+        let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+
+        // Obtener elementos del HTML
+        const input = document.getElementById('numeroInput');
+        const btnComprobar = document.getElementById('btnComprobar');
+        const btnReiniciar = document.getElementById('btnReiniciar');
+        const mensaje = document.getElementById('mensaje');
+
+        // Función para comprobar el número
+        btnComprobar.addEventListener('click', () => {
+            const numeroUsuario = parseInt(input.value);
+
+            // Validar que sea un número correcto
+            if (isNaN(numeroUsuario) || numeroUsuario < 1 || numeroUsuario > 100) {
+                mensaje.textContent = "⚠️ Por favor, escribe un número válido entre 1 y 100.";
+                mensaje.style.color = "yellow";
+                return;
+            }
+
+            // Comparar
+            if (numeroUsuario === numeroSecreto) {
+                mensaje.textContent = "🎉 ¡ADIVINASTE! ¡Felicidades!";
+                mensaje.style.color = "#00ff00";
+            } 
+            else if (numeroUsuario < numeroSecreto) {
+                mensaje.textContent = "⬆️ El número es MAYOR";
+                mensaje.style.color = "#ffcc00";
+            } 
+            else {
+                mensaje.textContent = "⬇️ El número es MENOR";
+                mensaje.style.color = "#ff6b6b";
+            }
+        });
+
+        // Función para reiniciar el juego
+        btnReiniciar.addEventListener('click', () => {
+            numeroSecreto = Math.floor(Math.random() * 100) + 1;
+            input.value = "";
+            mensaje.textContent = "🔄 Juego reiniciado. ¡Adivina el nuevo número!";
+            mensaje.style.color = "white";
+        });
+    </script>
+</body>
+</html>
